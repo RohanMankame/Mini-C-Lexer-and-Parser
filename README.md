@@ -1,88 +1,103 @@
-# Mini-C-Lexer-and-Parser
-This repository contains a foundational project for a compiler front-end, developed as a class assignment. It focuses on the lexical analysis (tokenizing) and parsing phases for a simplified C-like language, often referred to as "Mini-C."
+# Mini-C Lexer and Parser
 
-Project Overview
+This repository contains a foundational project for a compiler front-end, developed as a class assignment. It focuses on the **lexical analysis (tokenizing)** and **parsing** phases for a simplified C-like language, often referred to as "Mini-C."
+
+## Project Overview
+
 The primary goal of this project was to implement a lexer and a basic parser capable of processing Mini-C source code. The lexer breaks down the raw source into a stream of meaningful tokens, while the parser then processes this token stream, performs syntactic analysis, and builds a symbol table to manage identifiers and their types.
 
 The current implementation outputs the recognized tokens along with their attributes, line numbers, and column numbers, demonstrating the successful tokenization and initial stages of parsing.
 
-Features
-Lexical Analysis: Converts Mini-C source code into a stream of tokens (e.g., keywords, identifiers, operators, integer/float literals).
+## Features
 
-Token Recognition: Identifies various Mini-C language constructs such as FUNC, VAR, INT, BOOL, FLOAT, VOID, IF, ELSE, WHILE, RETURN, BREAK, CONTINUE, PRINT, STRUCT, SIZE, NEW, LPAREN, RPAREN, LBRACKET, RBRACKET, SEMI, COMMA, DOT, ADDR, VALUE, ASSIGN, TYPEOF, arithmetic operators (+, -, *, /, and, or, not), and relational operators (=, <>, <, >, <=, >=).
+* **Lexical Analysis:** Converts Mini-C source code into a stream of tokens (e.g., keywords, identifiers, operators, integer/float literals).
 
-Symbol Table Integration: Demonstrates the creation of new symbol table entities for identifiers during the lexical/parsing process.
+* **Token Recognition:** Identifies various Mini-C language constructs such as `FUNC`, `VAR`, `INT`, `BOOL`, `FLOAT`, `VOID`, `IF`, `ELSE`, `WHILE`, `RETURN`, `BREAK`, `CONTINUE`, `PRINT`, `STRUCT`, `SIZE`, `NEW`, `LPAREN`, `RPAREN`, `LBRACKET`, `RBRACKET`, `SEMI`, `COMMA`, `DOT`, `ADDR`, `VALUE`, `ASSIGN`, `TYPEOF`, arithmetic operators (`+`, `-`, `*`, `/`, `and`, `or`, `not`), and relational operators (`=`, `<>`, `<`, `>`, `<=`, `>=`).
 
-Error Handling: Includes basic lexical error detection for unexpected characters.
+* **Symbol Table Integration:** Demonstrates the creation of new symbol table entities for identifiers during the lexical/parsing process.
 
-Line and Column Tracking: Provides precise location information for each token.
+* **Error Handling:** Includes basic lexical error detection for unexpected characters.
 
-How it Works
-The project utilizes JFlex for lexical analysis and custom Java classes for parsing and overall compilation flow.
+* **Line and Column Tracking:** Provides precise location information for each token.
 
-Lexer.jflex (JFlex specification): Defines the regular expressions and rules for recognizing tokens in Mini-C. JFlex generates Lexer.java from this file.
+## How it Works
 
-Lexer.java (Generated): The actual lexical analyzer, responsible for reading input characters and producing tokens.
+The project utilizes `JFlex` for lexical analysis and custom Java classes for parsing and overall compilation flow.
 
-Parser.java: Consumes the token stream from the Lexer. It defines token constants and includes the yyparse() method which drives the token processing and prints token information.
+* **`Lexer.jflex` (JFlex specification):** Defines the regular expressions and rules for recognizing tokens in Mini-C. JFlex generates `Lexer.java` from this file.
 
-ParserVal.java: A utility class used to hold the semantic values (attributes) associated with the recognized tokens (e.g., the integer value of an INT_LIT token).
+* **`Lexer.java` (Generated):** The actual lexical analyzer, responsible for reading input characters and producing tokens.
 
-Compiler.java: The orchestrator class that initializes the Parser and initiates the parsing process.
+* **`Parser.java`:** Consumes the token stream from the `Lexer`. It defines token constants and includes the `yyparse()` method which drives the token processing and prints token information.
 
-Program.java: The main entry point of the application. It reads the Mini-C source file and passes it to the Compiler.
+* **`ParserVal.java`:** A utility class used to hold the semantic values (attributes) associated with the recognized tokens (e.g., the integer value of an `INT_LIT` token).
 
-Getting Started
-Prerequisites
-Java Development Kit (JDK) 8 or higher
+* **`Compiler.java`:** The orchestrator class that initializes the `Parser` and initiates the parsing process.
 
-JFlex 1.6.1 (or compatible version)
+* **`Program.java`:** The main entry point of the application. It reads the Mini-C source file and passes it to the `Compiler`.
 
-Building the Project
-Navigate to the src directory:
+## Getting Started
 
-cd proj2-minic-lexer/src
+### Prerequisites
 
+* Java Development Kit (JDK) 8 or higher
 
-Copy JFlex JAR:
-Ensure jflex-1.6.1.jar is present in the src directory. If not, download it and place it there.
+* JFlex 1.6.1 (or compatible version)
 
-Compile the Lexer using JFlex:
+### Building the Project
 
-java -jar jflex-1.6.1.jar Lexer.flex
+1.  **Navigate to the `src` directory:**
 
+    ```bash
+    cd proj2-minic-lexer/src
+    ```
 
-This command will generate Lexer.java in the src directory.
+2.  **Copy JFlex JAR:**
+    Ensure `jflex-1.6.1.jar` is present in the `src` directory. If not, download it and place it there.
 
-Compile all Java files:
+3.  **Compile the Lexer using JFlex:**
 
-javac *.java
+    ```bash
+    java -jar jflex-1.6.1.jar Lexer.flex
+    ```
 
+    This command will generate `Lexer.java` in the `src` directory.
 
-Running the Program
-From the src directory, execute the Program class, providing a Mini-C source file as an argument.
-For example, using test/solu1.txt as input (you may need to adjust the path depending on where you run it from):
+4.  **Compile all Java files:**
 
-java Program ../test/solu1.txt
+    ```bash
+    javac *.java
+    ```
 
+### Running the Program
 
-To capture the output to a file (recommended for analysis):
+1.  **From the `src` directory**, execute the `Program` class, providing a Mini-C source file as an argument.
+    For example, using `test/solu1.txt` as input (you may need to adjust the path depending on where you run it from):
 
-java Program ../test/solu1.txt > output.txt
+    ```bash
+    java Program ../test/solu1.txt
+    ```
 
+    To capture the output to a file (recommended for analysis):
 
-Example Output
+    ```bash
+    java Program ../test/solu1.txt > output.txt
+    ```
+
+## Example Output
+
 When running the program with a sample Mini-C file, the output will detail the recognized tokens, their attributes, and their position in the source code.
 
-Input (e.g., test/solu1.txt):
+**Input (e.g., `test/solu1.txt`):**
 
+```minic
 FUNC main()
 BEGIN
     VAR a BOOL;
     a := 1;
     PRINT a;
 END
-
+```
 
 Partial Output (similar to solu1.txt):
 
@@ -93,8 +108,6 @@ Partial Output (similar to solu1.txt):
     <PRINT, 5:5> <ID, attr:sym-id:1, 5:11><SEMI, 5:12>
 <END, 6:1>
 Success!
-
-
 File Structure
 proj2-minic-lexer/
 ├── src/
@@ -111,8 +124,6 @@ proj2-minic-lexer/
 │   ├── ...                 # Other test outputs
 │   └── solupreproc.txt     # Example output for preprocessor test
 └── .gitignore              # Specifies files to ignore in Git
-
-
 Contributing
 Feel free to fork this repository, open issues, or submit pull requests.
 
@@ -121,3 +132,4 @@ Rohan Mankame
 
 License
 This project is open-source and available under the MIT License.
+
